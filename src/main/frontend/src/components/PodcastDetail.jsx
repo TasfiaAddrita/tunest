@@ -2,11 +2,11 @@ import React, { useEffect, useState }  from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { Grid, Typography } from '@mui/material';
-// import EpisodeList from './EpisodeList';
+import EpisodeList from './EpisodeList';
 
 const PodcastDetail = () => {
   const { podcastId } = useParams();
-  const [podcast, setPodcast] = useState({});
+  const [podcast, setPodcast] = useState([]);
 
   const url = "http://localhost:8080/api/v1"
   const getPodcastById = (id) => {
@@ -37,7 +37,7 @@ const PodcastDetail = () => {
           {podcast.website}
         </Typography>
         <Typography variant="body1">{podcast.description}</Typography>
-        {/* <EpisodeList /> */}
+        <EpisodeList podcastId={podcastId}/>
       </Grid>
     </Grid>
   );

@@ -5,12 +5,14 @@ import './App.css';
 import { Provider } from './context';
 import PodcastGrid from './components/PodcastGrid';
 import PodcastDetail from './components/PodcastDetail';
+import TunestAppBar from './components/TunestAppBar';
 
 const App = () => {
 
   return (
     <Provider>
       <Router>
+        <TunestAppBar />
         <Container>
           <Routes>
             <Route path="/" element={ <PodcastGrid /> } />

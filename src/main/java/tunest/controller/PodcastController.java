@@ -1,7 +1,12 @@
 package tunest.controller;
 
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
+import tunest.model.Episode;
 import tunest.model.Podcast;
+import tunest.repository.EpisodeRepository;
 import tunest.repository.PodcastRepository;
 
 import java.util.List;
@@ -11,9 +16,13 @@ import java.util.List;
 @CrossOrigin
 public class PodcastController {
     private PodcastRepository podcastRepository;
+    private EpisodeRepository episodeRepository;
+    private MongoTemplate mongoTemplate;
 
-    public PodcastController(PodcastRepository podcastRepository) {
+    public PodcastController(PodcastRepository podcastRepository, EpisodeRepository episodeRepository, MongoTemplate mongoTemplate) {
         this.podcastRepository = podcastRepository;
+        this.episodeRepository = episodeRepository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     @GetMapping("/podcasts")
@@ -31,5 +40,13 @@ public class PodcastController {
     @PostMapping("/podcast")
     public void createPodcast(@RequestBody Podcast podcast) {
         this.podcastRepository.insert(podcast);
+    }
+
+    @GetMapping("/podcast/{podcastId}/episodes")
+    public List<Episode> getAllEpisodesByPodcastId(@PathVariable("podcastId") String podcastId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("podcastId").is(podcastId));
+        List<Episode> episodes = mongoTemplate.find(query, Episode.class);
+        return episodes;
     }
 }

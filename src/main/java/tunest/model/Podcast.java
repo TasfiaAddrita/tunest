@@ -4,8 +4,10 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
-@Document
+@Document("podcasts")
 public class Podcast {
 
     @Id
@@ -16,6 +18,7 @@ public class Podcast {
     private String description;
     private String website;
     private String image;
+//    private List<Episode> episodes;
 
     public Podcast(String name, String company, String description, String website, String image) {
         this.name = name;
