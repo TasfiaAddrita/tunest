@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { List, ListSubheader, ListItem, ListItemText, Grid } from "@mui/material";
+import { List, ListSubheader } from "@mui/material";
 import EpisodeListItem from './EpisodeListItem';
 
 const EpisodeList = ({ podcastId }) => {
@@ -26,7 +26,7 @@ const EpisodeList = ({ podcastId }) => {
         Episodes
       </ListSubheader>
       {episodes.map((episode) => (
-        <EpisodeListItem episode={episode} />
+        <EpisodeListItem episode={episode} key={episode.id} />
       ))}
     </List>
   );

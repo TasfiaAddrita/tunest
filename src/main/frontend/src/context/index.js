@@ -5,6 +5,7 @@ export const Context = createContext();
 
 export function Provider(props) {
   const [podcasts, setPodcasts] = useState([]);
+  const [audioList, setAudioList] = useState([]);
 
   const url = "http://localhost:8080/api/v1"
 
@@ -16,11 +17,19 @@ export function Provider(props) {
     })
   }
 
+  const addPodcastEpisodeToAudioList = (podcastEpisode) => {
+    const episode = {
+      name: podcastEpisode.title,
+      musicSrc: podcastEpisode.audioLink
+    }
+    setAudioList([...audioList, episode])
+  }
+
   useEffect(getPodcasts, []);
 
   return (
     <Context.Provider
-      value={{ podcasts, getPodcasts }}
+      value={{ podcasts, getPodcasts, audioList, addPodcastEpisodeToAudioList }}
       {...props}
     />
   );

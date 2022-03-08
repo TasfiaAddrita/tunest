@@ -6,6 +6,7 @@ import { Provider } from './context';
 import PodcastGrid from './components/PodcastGrid';
 import PodcastDetail from './components/PodcastDetail';
 import TunestAppBar from './components/TunestAppBar';
+import AudioPlayer from './components/AudioPlayer';
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/podcast/:podcastId" element={ <PodcastDetail /> } />
           </Routes>
         </Container>
+        <AudioPlayer />
       </Router>
     </Provider>
   );
