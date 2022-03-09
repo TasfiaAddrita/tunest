@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
+import tunest.repository.PodcastRepository;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class Episode {
     private String audioLink;
     private LocalDateTime releaseDate;
 
-    public Episode(String podcastId, String title, String description, String audioLink, LocalDateTime releaseDate) {
+    public Episode(String podcastId, String title, String description, String audioLink) {
         this.podcastId = podcastId;
         this.title = title;
         this.description = description;

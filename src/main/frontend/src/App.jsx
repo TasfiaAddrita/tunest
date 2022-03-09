@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -7,6 +7,7 @@ import PodcastGrid from './components/PodcastGrid';
 import PodcastDetail from './components/PodcastDetail';
 import TunestAppBar from './components/TunestAppBar';
 import AudioPlayer from './components/AudioPlayer';
+import Login from './components/Login';
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
     <Provider>
       <Router>
         <TunestAppBar />
+        <Login />
         <Container>
           <Routes>
             <Route path="/" element={ <PodcastGrid /> } />

@@ -15,7 +15,7 @@ const AudioPlayer = () => {
     mode: 'full',
     remove: true,
     responsive: false,
-    showDestroy: true,
+    // showDestroy: true,
     showDownload: false,
     showPlayMode: false,
     showReload: false,
@@ -24,7 +24,7 @@ const AudioPlayer = () => {
   }
 
   return (
-    <ReactJkMusicPlayer {...options} />
+    <>{audioList.length > 0 && <ReactJkMusicPlayer {...options} />}</>
   )
 }
 
