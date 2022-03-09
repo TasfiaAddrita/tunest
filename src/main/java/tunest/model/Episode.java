@@ -3,10 +3,10 @@ package tunest.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 import tunest.repository.PodcastRepository;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Document("episodes")
@@ -19,14 +19,14 @@ public class Episode {
     private String title;
     private String description;
     private String audioLink;
-    private LocalDateTime releaseDate;
+    private Date releaseDate;
 
-    public Episode(String podcastId, String title, String description, String audioLink) {
+    public Episode(String podcastId, String title, String description, String audioLink, Date releaseDate) {
         this.podcastId = podcastId;
         this.title = title;
         this.description = description;
         this.audioLink = audioLink;
-        this.releaseDate = LocalDateTime.now();
+        this.releaseDate = releaseDate;
     }
 
 }
