@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { Container } from '@mui/material';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { Container, Button } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import { Provider } from './context';
-import PodcastGrid from './components/PodcastGrid';
 import PodcastDetail from './components/PodcastDetail';
 import TunestAppBar from './components/TunestAppBar';
 import AudioPlayer from './components/AudioPlayer';
-import Login from './components/Login';
+import RSSFeedForm from './components/RSSFeedForm';
+import Home from './components/Home';
 
 const App = () => {
 
@@ -15,11 +15,11 @@ const App = () => {
     <Provider>
       <Router>
         <TunestAppBar />
-        <Login />
         <Container>
           <Routes>
-            <Route path="/" element={ <PodcastGrid /> } />
-            <Route path="/podcast/:podcastId" element={ <PodcastDetail /> } />
+            <Route path="/" element={<Home />} />
+            <Route path="/podcast/:podcastId" element={<PodcastDetail />} />
+            <Route path="/rss-feed" element={<RSSFeedForm />} />
           </Routes>
         </Container>
         <AudioPlayer />

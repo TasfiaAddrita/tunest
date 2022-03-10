@@ -26,33 +26,4 @@ public class EpisodeController {
     public void createEpisode(@RequestBody Episode episode) {
         this.episodeRepository.insert(episode);
     }
-
-    @PostMapping("/rss-feed")
-    public void insertEpisodesByRssFeed() {
-        int maxEpisodes = 1;
-
-        try {
-//            String podcastRssFeedUrl = "https://video-api.wsj.com/podcast/rss/wsj/the-journal";
-            String podcastRssFeedUrl = "https://feeds.simplecast.com/54nAGcIl";
-
-            try (XmlReader reader = new XmlReader(new URL(podcastRssFeedUrl))) {
-                SyndFeed feed = new SyndFeedInput().build(reader);
-                List<SyndEntry> rssFeed = feed.getEntries();
-                for (int i = 0; i < maxEpisodes; i++) {
-                    SyndEntry entry = rssFeed.get(i);
-                    Date publishedDate = entry.getPublishedDate();
-                    Episode episode = new Episode(
-                            "replace me",
-                            entry.getTitle(),
-                            entry.getDescription().getValue(),
-                            entry.getEnclosures().get(0).getUrl(),
-                            publishedDate
-                    );
-                    this.episodeRepository.insert(episode);
-                }
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

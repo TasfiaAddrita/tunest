@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import parse from "html-react-parser";
 import { ListItem, ListItemText, Grid, Button } from "@mui/material";
 import { Context } from '../context';
 
@@ -13,7 +14,9 @@ const EpisodeListItem = ({ episode }) => {
           <ListItemText>{episode.title}</ListItemText>
         </Grid>
         <Grid item xs={10} sx={{ bgcolor: "green" }}>
-          <ListItemText>{episode.description}</ListItemText>
+          <ListItemText>{
+            parse(episode.description)
+          }</ListItemText>
         </Grid>
       </Grid>
     </ListItem>

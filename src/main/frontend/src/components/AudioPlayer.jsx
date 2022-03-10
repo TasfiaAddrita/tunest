@@ -24,8 +24,9 @@ const AudioPlayer = () => {
   }
 
   return (
-    <>{audioList.length > 0 && <ReactJkMusicPlayer {...options} />}</>
-  )
+    // <>{audioList.length > 0 && <ReactJkMusicPlayer {...options} />}</>
+    <ReactJkMusicPlayer {...options} />
+  );
 }
 
 export default AudioPlayer
