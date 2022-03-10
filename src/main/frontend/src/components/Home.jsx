@@ -7,9 +7,9 @@ const Home = () => {
   return (
     <div>
       <PodcastGrid />
-      <Link to="/rss-feed" style={{ textDecoration: "none", color: "white" }}>
+      {/* <Link to="/rss-feed" style={{ textDecoration: "none", color: "white" }}>
         <Button variant="contained">Add Podcast via RSS Feed</Button>
-      </Link>
+      </Link> */}
     </div>
   );
 }
