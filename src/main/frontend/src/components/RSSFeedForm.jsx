@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, TextField } from '@mui/material'
 import axios from 'axios';
 import PodcastPreview from './PodcastPreview';
 import { Box } from '@mui/system';
-import { grey } from '@mui/material/colors';
+import { Context } from '../context';
 
 const RSSFeedForm = () => {
+  const { addPodcastToState } = useContext(Context);
   const [rssFeedUrl, setRssFeedUrl] = useState("");
   const [podcastPreviewDetails, setPodcastPreviewDetails] = useState([]);
 
@@ -13,6 +14,16 @@ const RSSFeedForm = () => {
     axios
       .get("http://localhost:8080/api/v1/rss-feed/podcast?url=" + rssFeedUrl)
       .then((response) => setPodcastPreviewDetails(response.data));
+  }
+
+  const savePodcast = (podcast) => {
+    axios
+      .post("http://localhost:8080/api/v1/podcast", podcast)
+      .then((response) => {
+        podcast.id = response.data;
+        addPodcastToState(podcast);
+        axios.post(`http://localhost:8080/api/v1/rss-feed/episodes?podcastId=${podcast.id}&url=${rssFeedUrl}`) 
+      })
   }
 
   const handleInputChange = (e) => {
@@ -50,9 +61,10 @@ const RSSFeedForm = () => {
             variant="outlined"
             fullWidth
           />
-          <Button type="submit">Submit</Button>
+          <Button variant="contained" type="submit">Submit</Button>
         </form>
         <PodcastPreview podcastPreviewDetails={podcastPreviewDetails} />
+        <Button variant="contained" onClick={() => savePodcast(podcastPreviewDetails)}>Add podcast to database</Button>
       </div>
     </Box>
   );

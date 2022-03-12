@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import PodcastGrid from './PodcastGrid';
+import { Context } from '../context';
 
 const Home = () => {
+  const { getPodcasts } = useContext(Context);
+
+  useEffect(getPodcasts, []);
+
   return (
     <div>
       <PodcastGrid />

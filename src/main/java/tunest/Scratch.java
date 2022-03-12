@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
-public class sejfoiwea {
+public class Scratch {
     public static void main(String[] args) {
         int maxEpisodes = 1;
 

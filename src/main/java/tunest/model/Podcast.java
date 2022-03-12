@@ -1,6 +1,7 @@
 package tunest.model;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,13 +19,23 @@ public class Podcast {
     private String description;
     private String website;
     private String image;
-//    private List<Episode> episodes;
+    private String rssFeedUrl;
 
-    public Podcast(String name, String company, String description, String website, String image) {
+//    public Podcast(String name, String company, String description, String website, String image) {
+//        this.name = name;
+//        this.company = company;
+//        this.description = description;
+//        this.website = website;
+//        this.image = image;
+//        this.rssFeedUrl = null;
+//    }
+
+    public Podcast(String name, String company, String description, String website, String image, String rssFeedUrl) {
         this.name = name;
         this.company = company;
         this.description = description;
         this.website = website;
         this.image = image;
+        this.rssFeedUrl = rssFeedUrl;
     }
 }

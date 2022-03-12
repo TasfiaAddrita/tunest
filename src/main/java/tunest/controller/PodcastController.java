@@ -38,8 +38,9 @@ public class PodcastController {
     }
 
     @PostMapping("/podcast")
-    public void createPodcast(@RequestBody Podcast podcast) {
+    public String createPodcast(@RequestBody Podcast podcast) {
         this.podcastRepository.insert(podcast);
+        return podcast.getId();
     }
 
     @GetMapping("/podcast/{podcastId}/episodes")

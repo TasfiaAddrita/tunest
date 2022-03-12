@@ -37,7 +37,8 @@ public class RSSFeedController {
                         author,
                         feed.getDescription(),
                         feed.getLink(),
-                        feed.getImage().getUrl()
+                        feed.getImage().getUrl(),
+                        rssFeedUrl
                 );
                 return podcast;
             }
@@ -47,21 +48,22 @@ public class RSSFeedController {
         return null;
     }
 
-    public void insertEpisodesByRssFeed() {
-        int maxEpisodes = 1;
+    @PostMapping("/episodes")
+    public String insertEpisodesByRssFeed(@RequestParam("podcastId") String podcastId, @RequestParam("url") String rssFeedUrl) {
+        int maxEpisodes = 20;
 
         try {
-//            String podcastRssFeedUrl = "https://video-api.wsj.com/podcast/rss/wsj/the-journal";
-            String podcastRssFeedUrl = "https://feeds.simplecast.com/54nAGcIl";
-
-            try (XmlReader reader = new XmlReader(new URL(podcastRssFeedUrl))) {
+            try (XmlReader reader = new XmlReader(new URL(rssFeedUrl))) {
                 SyndFeed feed = new SyndFeedInput().build(reader);
                 List<SyndEntry> rssFeed = feed.getEntries();
+                if (rssFeed.size() > maxEpisodes) {
+                    maxEpisodes = rssFeed.size();
+                }
                 for (int i = 0; i < maxEpisodes; i++) {
                     SyndEntry entry = rssFeed.get(i);
                     Date publishedDate = entry.getPublishedDate();
                     Episode episode = new Episode(
-                            "replace me",
+                            podcastId,
                             entry.getTitle(),
                             entry.getDescription().getValue(),
                             entry.getEnclosures().get(0).getUrl(),
@@ -69,9 +71,11 @@ public class RSSFeedController {
                     );
                     this.episodeRepository.insert(episode);
                 }
+                return "Success!";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "Failed";
     }
 }

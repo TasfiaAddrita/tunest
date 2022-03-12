@@ -22,6 +22,14 @@ const PodcastPreview = ({ podcastPreviewDetails }) => {
       />
       <TextField
         id="outlined-required"
+        label="Website"
+        value={podcastPreviewDetails.website}
+        InputProps={{ readOnly: true }}
+        focused
+        fullWidth
+      />
+      <TextField
+        id="outlined-required"
         label="Description"
         value={podcastPreviewDetails.description}
         InputProps={{ readOnly: true }}

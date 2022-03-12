@@ -18,6 +18,10 @@ export function Provider(props) {
     })
   }
 
+  const addPodcastToState = (newPodcast) => {
+    setPodcasts([...podcasts, newPodcast])
+  }
+
   const addPodcastEpisodeToAudioList = (podcastEpisode) => {
     const episode = {
       name: podcastEpisode.title,
@@ -37,6 +41,7 @@ export function Provider(props) {
         addPodcastEpisodeToAudioList,
         isUserLoggedIn,
         setIsUserLoggedIn,
+        addPodcastToState,
       }}
       {...props}
     />
