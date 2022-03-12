@@ -14,6 +14,16 @@ public class User {
     private String id;
 
     private String googleId;
+    private String email;
+    private String firstName;
+    private String lastName;
     private Boolean isAdmin;
     private List<Podcast> savedPodcasts;
+
+    public User(String googleId, String email, String firstName, String lastName) {
+        this.googleId = googleId;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
