@@ -1,5 +1,6 @@
 package tunest.controller;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -44,9 +45,27 @@ public class PodcastController {
     }
 
     @GetMapping("/podcast/{podcastId}/episodes")
-    public List<Episode> getAllEpisodesByPodcastId(@PathVariable("podcastId") String podcastId) {
+    public List<Episode> getAllEpisodesByPodcastId(@PathVariable("podcastId") String podcastId, @RequestParam("sort") String sortBy) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("podcastId").is(podcastId));
+        Sort sort;
+        switch (sortBy) {
+            case "titleasc":
+                sort = Sort.by(Sort.Direction.ASC, "title");
+                break;
+            case "titledesc":
+                sort = Sort.by(Sort.Direction.DESC, "title");
+                break;
+            case "dateasc":
+                sort = Sort.by(Sort.Direction.ASC, "releaseDate");
+                break;
+            case "datedesc":
+                sort = Sort.by(Sort.Direction.DESC, "releaseDate");
+                break;
+            default:
+                sort = Sort.by(Sort.Direction.ASC, "releaseDate");
+                break;
+        }
+        query.addCriteria(Criteria.where("podcastId").is(podcastId)).with(sort);
         List<Episode> episodes = mongoTemplate.find(query, Episode.class);
         return episodes;
     }

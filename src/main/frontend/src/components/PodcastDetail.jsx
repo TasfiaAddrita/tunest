@@ -5,6 +5,10 @@ import { Grid, Typography, IconButton } from '@mui/material';
 import EpisodeList from './EpisodeList';
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkAddOutlined from "@mui/icons-material/BookmarkAddOutlined";
+import ThumbUp from "@mui/icons-material/ThumbUp"
+import ThumbDown from "@mui/icons-material/ThumbDown";
+import ThumbUpOutlined from "@mui/icons-material/ThumbUpOutlined";
+import ThumbDownOutlined from "@mui/icons-material/ThumbDownOutlined";
 import { Context } from '../context';
 
 const PodcastDetail = () => {
@@ -12,6 +16,8 @@ const PodcastDetail = () => {
   const { podcastId } = useParams();
   const [podcast, setPodcast] = useState([]);
   const [fillBookmark, setFillBookmark] = useState(false);
+  const [fillThumbUp, setFillThumbUp] = useState(false);
+  const [fillThumbDown, setFillThumbDown] = useState(false);
 
   const url = "http://localhost:8080/api/v1"
   const getPodcastById = (id) => {
@@ -27,12 +33,23 @@ const PodcastDetail = () => {
     else setFillBookmark(true);
   }
 
+  const toggleFillThumbUp = () => {
+    if (fillThumbUp) setFillThumbUp(false);
+    else setFillThumbUp(true);
+  }
+
+  const toggleFillThumbDown = () => {
+    if (fillThumbDown) setFillThumbDown(false);
+    else setFillThumbDown(true);
+  };
+
+
   const savePodcastToUserProfile = () => {
     toggleFillBookmark();
     axios
       .post(url + `/user/saved-podcasts/${user.googleId}`, podcastId, {
         headers: {
-          "Content-Type": "text/plain", // This was added to prevent the = from adding to data
+          "Content-Type": "text/plain", // This was added to prevent the "=" from appending to data
         },
       })
       .then((response) => console.log(response.data));
@@ -50,6 +67,17 @@ const PodcastDetail = () => {
     <Grid container spacing={6}>
       <Grid item xs={4}>
         <img style={{ width: "100%" }} src={podcast.image} />
+
+        {fillThumbUp ? (
+          <IconButton onClick={() => toggleFillThumbUp()}>
+            <ThumbUp />
+          </IconButton>
+        ) : (
+          <IconButton onClick={() => toggleFillThumbUp()}>
+            <ThumbUpOutlined />
+          </IconButton>
+        )}
+
         {fillBookmark ? (
           <IconButton onClick={() => removePodcastFromUserProfile()}>
             <BookmarkIcon />
@@ -59,7 +87,18 @@ const PodcastDetail = () => {
             <BookmarkAddOutlined />
           </IconButton>
         )}
+
+        {fillThumbDown ? (
+          <IconButton onClick={() => toggleFillThumbDown()}>
+            <ThumbDown />
+          </IconButton>
+        ) : (
+          <IconButton onClick={() => toggleFillThumbDown()}>
+            <ThumbDownOutlined />
+          </IconButton>
+        )}
       </Grid>
+
       <Grid item xs={8}>
         <Typography variant="h2" component="h1">
           {podcast.name}
@@ -71,7 +110,7 @@ const PodcastDetail = () => {
           {podcast.website}
         </Typography>
         <Typography variant="body1">{podcast.description}</Typography>
-        <EpisodeList podcastId={podcastId} />
+        <EpisodeList podcast={podcast} podcastId={podcastId} />
       </Grid>
     </Grid>
   );
