@@ -24,7 +24,7 @@ const App = () => {
             <Route path="/saved" element={<SavedPodcasts />} />
           </Routes>
         </Container>
-        <AudioPlayer />
+        {/* <AudioPlayer /> */}
       </Router>
     </Provider>
   );

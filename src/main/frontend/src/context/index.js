@@ -7,6 +7,7 @@ export function Provider(props) {
   const [podcasts, setPodcasts] = useState([]);
   const [audioList, setAudioList] = useState([]);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [user, setUser] = useState("");
 
   const url = "http://localhost:8080/api/v1"
 
@@ -35,13 +36,11 @@ export function Provider(props) {
   return (
     <Context.Provider
       value={{
-        podcasts,
-        getPodcasts,
-        audioList,
-        addPodcastEpisodeToAudioList,
-        isUserLoggedIn,
-        setIsUserLoggedIn,
+        podcasts, getPodcasts,
+        audioList, addPodcastEpisodeToAudioList,
+        isUserLoggedIn, setIsUserLoggedIn,
         addPodcastToState,
+        user, setUser
       }}
       {...props}
     />

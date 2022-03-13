@@ -9,7 +9,7 @@ const clientId =
 function Login() {
   // Code source: https://codingdiksha.com/login-with-google-using-reactjs/
 
-  const { setIsUserLoggedIn } = useContext(Context);
+  const { setIsUserLoggedIn, setUser } = useContext(Context);
 
   const [showloginButton, setShowloginButton] = useState(true);
   const [showlogoutButton, setShowlogoutButton] = useState(false);
@@ -19,6 +19,8 @@ function Login() {
     setShowloginButton(false);
     setShowlogoutButton(true);
     setIsUserLoggedIn(true);
+
+    setUser(res.profileObj);
 
     const user = {
       googleId: res.profileObj.googleId,
