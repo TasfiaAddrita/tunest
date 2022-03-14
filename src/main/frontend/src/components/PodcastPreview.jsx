@@ -1,5 +1,6 @@
 import { Grid, TextField } from '@mui/material'
 import React from 'react'
+import placeholder from "../assets/podcast_placeholder.png";
 
 const PodcastPreview = ({ podcastPreviewDetails }) => {
   return (
@@ -9,10 +10,7 @@ const PodcastPreview = ({ podcastPreviewDetails }) => {
           {podcastPreviewDetails.image ? (
             <img style={{ width: "100%" }} src={podcastPreviewDetails.image} />
           ) : (
-            <img
-              style={{ width: "100%" }}
-              src="https://pathwaysfoundation.org.au/wp-content/uploads/2020/08/podcast_placeholder.b5c814ab.png"
-            />
+            <img style={{ width: "100%" }} src={placeholder} />
           )}
         </Grid>
         <Grid item xs={8}>

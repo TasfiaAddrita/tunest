@@ -30,7 +30,7 @@ const EpisodeList = ({ podcast, podcastId }) => {
         setEpisodes([].concat(episodes).sort((a, b) => (a.title < b.title ? 1 : -1)));
         break;
       case "dateasc":
-          setEpisodes([].concat(episodes).sort((a, b) => (b.releaseDate < a.releaseDate ? 1 : -1)))
+        setEpisodes([].concat(episodes).sort((a, b) => (b.releaseDate < a.releaseDate ? 1 : -1)))
         break;
       case "datedesc":
         setEpisodes([].concat(episodes).sort((a, b) => (a.releaseDate < b.releaseDate ? 1 : -1)))
