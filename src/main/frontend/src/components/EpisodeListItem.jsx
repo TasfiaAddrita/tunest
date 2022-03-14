@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import parse from "html-react-parser";
-import { ListItem, ListItemText, Grid, Button, Typography } from "@mui/material";
+import { ListItem, ListItemText, Grid, Button, Typography, Paper } from "@mui/material";
 import { Context } from '../context';
 
 const EpisodeListItem = ({ podcast, episode }) => {
@@ -16,7 +16,9 @@ const EpisodeListItem = ({ podcast, episode }) => {
           <Grid item xs={10} sx={{ bgcolor: "green" }}>
             <ListItemText>{episode.title}</ListItemText>
             {/* <Typography variant="p">{episode.title}</Typography> */}
-            <ListItemText>{parse(episode.description)}</ListItemText>
+            <ListItemText>
+              {parse(episode.description)}
+            </ListItemText>
             {/* <Typography variant="p">{parse(episode.description)}</Typography> */}
           </Grid>
         </Grid>

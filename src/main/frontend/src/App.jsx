@@ -9,6 +9,7 @@ import AudioPlayer from './components/AudioPlayer';
 import RSSFeedForm from './components/RSSFeedForm';
 import Home from './components/Home';
 import SavedPodcasts from './components/SavedPodcasts';
+import SearchResults from './components/SearchResults';
 
 const App = () => {
 
@@ -22,9 +23,10 @@ const App = () => {
             <Route path="/podcast/:podcastId" element={<PodcastDetail />} />
             <Route path="/rss-feed" element={<RSSFeedForm />} />
             <Route path="/saved" element={<SavedPodcasts />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </Container>
-        {/* <AudioPlayer /> */}
+        <AudioPlayer />
       </Router>
     </Provider>
   );

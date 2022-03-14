@@ -17,7 +17,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Context } from "../context"
 import Login from "./Login";
 
@@ -162,6 +162,13 @@ const TunestAppBar = () => {
     </Menu>
   );
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      console.log(e.target.value);
+      <Navigate to="/search" />
+    } 
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -176,7 +183,7 @@ const TunestAppBar = () => {
               tunest
             </Link>
           </Typography>
-          <Search>
+          <Search onKeyDown={handleKeyDown}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
