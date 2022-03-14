@@ -45,27 +45,9 @@ public class PodcastController {
     }
 
     @GetMapping("/podcast/{podcastId}/episodes")
-    public List<Episode> getAllEpisodesByPodcastId(@PathVariable("podcastId") String podcastId, @RequestParam("sort") String sortBy) {
+    public List<Episode> getAllEpisodesByPodcastId(@PathVariable("podcastId") String podcastId) {
         Query query = new Query();
-        Sort sort;
-        switch (sortBy) {
-            case "titleasc":
-                sort = Sort.by(Sort.Direction.ASC, "title");
-                break;
-            case "titledesc":
-                sort = Sort.by(Sort.Direction.DESC, "title");
-                break;
-            case "dateasc":
-                sort = Sort.by(Sort.Direction.ASC, "releaseDate");
-                break;
-            case "datedesc":
-                sort = Sort.by(Sort.Direction.DESC, "releaseDate");
-                break;
-            default:
-                sort = Sort.by(Sort.Direction.ASC, "releaseDate");
-                break;
-        }
-        query.addCriteria(Criteria.where("podcastId").is(podcastId)).with(sort);
+        query.addCriteria(Criteria.where("podcastId").is(podcastId));
         List<Episode> episodes = mongoTemplate.find(query, Episode.class);
         return episodes;
     }
